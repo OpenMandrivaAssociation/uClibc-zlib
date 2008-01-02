@@ -29,6 +29,7 @@ Patch1:		zlib-1.2.1-multibuild.patch
 Patch2:		zlib-1.2.2.2-build-fPIC.patch
 Patch4:		zlib-1.2.1.1-deb-alt-inflate.patch
 BuildRequires:	uClibc uClibc-devel uClibc-static-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The zlib compression library provides in-memory compression and
