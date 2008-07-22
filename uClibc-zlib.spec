@@ -19,7 +19,7 @@
 Summary:	The zlib compression and decompression library
 Name:		uClibc-%{realname}
 Version:	1.2.3
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.gzip.org/zlib/
