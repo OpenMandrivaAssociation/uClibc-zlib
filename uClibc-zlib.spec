@@ -80,9 +80,9 @@ will use the zlib library.
 
 mkdir objs
 pushd objs
-    CFLAGS="%{optflags}" uclibc ../configure --shared --prefix=%{basedir}/usr
-    uclibc make
-    uclibc make test
+    CFLAGS="%{optflags}" ../configure --shared --prefix=%{basedir}/usr
+    make
+    make test
     ln -s ../zlib.3 .
 popd
 
@@ -93,7 +93,7 @@ install -d %{buildroot}%{_prefix}
 install -d %{buildroot}%{_libdir}
 install -d %{buildroot}%{_lib}
 
-uclibc make install -C objs prefix=%{buildroot}%{basedir}%{_prefix} \
+make install -C objs prefix=%{buildroot}%{basedir}%{_prefix} \
     includedir=%{buildroot}%{_includedir} libdir=%{buildroot}%{_libdir}
 
 mv %{buildroot}%{_libdir}/*.so.* %{buildroot}/%{_lib}/
