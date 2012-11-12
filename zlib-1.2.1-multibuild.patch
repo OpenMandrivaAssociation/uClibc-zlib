@@ -1,0 +1,51 @@
+--- zlib-1.2.1/configure.multibuild	2003-11-17 04:50:39.000000000 +0100
++++ zlib-1.2.1/configure	2004-01-07 00:18:39.000000000 +0100
+@@ -18,11 +18,12 @@
+ # If you have problems, try without defining CC and CFLAGS before reporting
+ # an error.
+ 
++top_srcdir=`dirname $0`
+ LIBS=libz.a
+ LDFLAGS="-L. ${LIBS}"
+-VER=`sed -n -e '/VERSION "/s/.*"\(.*\)".*/\1/p' < zlib.h`
+-VER2=`sed -n -e '/VERSION "/s/.*"\([0-9]*\\.[0-9]*\)\\..*/\1/p' < zlib.h`
+-VER1=`sed -n -e '/VERSION "/s/.*"\([0-9]*\)\\..*/\1/p' < zlib.h`
++VER=`sed -n -e '/VERSION "/s/.*"\(.*\)".*/\1/p' < $top_srcdir/zlib.h`
++VER2=`sed -n -e '/VERSION "/s/.*"\([0-9]*\\.[0-9]*\)\\..*/\1/p' < $top_srcdir/zlib.h`
++VER1=`sed -n -e '/VERSION "/s/.*"\([0-9]*\)\\..*/\1/p' < $top_srcdir/zlib.h`
+ AR=${AR-"ar rc"}
+ RANLIB=${RANLIB-"ranlib"}
+ prefix=${prefix-/usr/local}
+@@ -182,10 +183,10 @@ cat > $test.c <<EOF
+ int main() { return 0; }
+ EOF
+ if test "`($CC -c $CFLAGS $test.c) 2>&1`" = ""; then
+-  sed < zconf.in.h "/HAVE_UNISTD_H/s%0%1%" > zconf.h
++  sed < $top_srcdir/zconf.in.h "/HAVE_UNISTD_H/s%0%1%" > zconf.h
+   echo "Checking for unistd.h... Yes."
+ else
+-  cp -p zconf.in.h zconf.h
++  cp -p $top_srcdir/zconf.in.h zconf.h
+   echo "Checking for unistd.h... No."
+ fi
+ 
+@@ -424,7 +425,7 @@ esac
+ rm -f $test.[co] $test $test$shared_ext
+ 
+ # udpate Makefile
+-sed < Makefile.in "
++sed < $top_srcdir/Makefile.in "
+ /^CC *=/s#=.*#=$CC#
+ /^CFLAGS *=/s#=.*#=$CFLAGS#
+ /^CPP *=/s#=.*#=$CPP#
+@@ -443,3 +444,10 @@ sed < Makefile.in "
+ /^mandir *=/s#=.*#=$mandir#
+ /^LDFLAGS *=/s#=.*#=$LDFLAGS#
+ " > Makefile
++
++# symlink sources
++if test "$top_srcdir" != "."; then
++  for f in $top_srcdir/*.[ch]; do
++    ln -s $f `basename $f`
++  done
++fi

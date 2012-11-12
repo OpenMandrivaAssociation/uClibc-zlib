@@ -1,0 +1,11 @@
+--- zlib-1.2.1/Makefile.in.orig	2003-11-09 03:29:23.000000000 +0100
++++ zlib-1.2.1/Makefile.in	2004-01-06 22:19:23.000000000 +0100
+@@ -78,7 +78,7 @@ match.o: match.S
+ 	rm -f _match.s
+ 
+ $(SHAREDLIBV): $(OBJS)
+-	$(LDSHARED) -o $@ $(OBJS)
++	$(LDSHARED) -o $@ $(OBJS) -lc
+ 	rm -f $(SHAREDLIB) $(SHAREDLIBM)
+ 	ln -s $@ $(SHAREDLIB)
+ 	ln -s $@ $(SHAREDLIBM)
