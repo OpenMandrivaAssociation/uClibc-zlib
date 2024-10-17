@@ -22,7 +22,7 @@ Version:	1.2.3
 Release:	%mkrel 8
 License:	BSD
 Group:		System/Libraries
-URL:		http://www.gzip.org/zlib/
+URL:		https://www.gzip.org/zlib/
 Source0:	http://prdownloads.sourceforge.net/libpng/%{realname}-%{version}.tar.bz2
 Patch0:		zlib-1.2.1-glibc.patch
 Patch1:		zlib-1.2.1-multibuild.patch
